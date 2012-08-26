@@ -9,19 +9,14 @@ usage:
 
     // controller
 
-    use Msi\Bundle\GoogleBundle\Map\Map;
+    $map = $this->container->get('msi_google.map_factory')->create('mapCanvas', array());
 
-    $builder = $this->container->get('msi_google.map_factory')->createBuilder('mapCanvas', array());
+    $map->setKey('ewhf09weFf9w3hj39ff9wf9h3h0h32fh38290h');
 
-    $builder->setKey('ewhf09weFf9w3hj39ff9wf9h3h0h32fh38290h');
-
-    $builder->addOverlay('marker', array(
-        'position' => Map::latlng(-32423, 737213),
+    $map->addOverlay('marker', array(
+        'position' => $map->latlng(-32423, 737213),
         'title' => 'dadada',
     ));
-
-    $map = $builder->getMap();
-
 
     // view
 

@@ -4,26 +4,12 @@ namespace Msi\Bundle\GoogleBundle\Map;
 
 class MapRenderer
 {
-    private $map;
-
-    public function getMap()
-    {
-        return $this->map;
-    }
-
-    public function setMap($map)
-    {
-        $this->map = $map;
-
-        return $this;
-    }
-
-    public function toJs()
+    public function render(Map $map)
     {
         $js = 'function initMap() {'."\n";
-        $js .= 'var '.$this->map.' = new google.maps.Map(document.getElementById("'.$this->map->getMapDiv().'"), '.$this->arrayToJson($this->map->getOptions()).');'."\n";
+        $js .= 'var '.$map.' = new google.maps.Map(document.getElementById("'.$map->getMapDiv().'"), '.$this->arrayToJson($map->getOptions()).');'."\n";
 
-        foreach ($this->map->getOverlays() as $overlay) {
+        foreach ($map->getOverlays() as $overlay) {
             $js .= 'var '.$overlay['class'].uniqid().' = new google.maps.'.ucfirst($overlay['class']).'('.$this->arrayToJson($overlay['options']).');'."\n";
         }
 

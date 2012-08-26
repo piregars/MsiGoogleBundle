@@ -17,7 +17,7 @@ class Map
 
     protected $id;
 
-    protected $overlays;
+    protected $overlays = array();
 
     public function __construct($mapDiv, array $options = array())
     {
@@ -29,18 +29,44 @@ class Map
         $this->options = $resolver->resolve($options);
     }
 
-    public function render()
+    public function geocode($address)
     {
-        $renderer = new MapRenderer();
+        $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='.urlencode($address));
+        $json = json_decode(utf8_encode($json), true);
 
-        $map = $renderer->setMap($this)->toJs();
+        if ($json['status'] === 'OK') {
+            return $json;
+        }
 
-        return $map;
+        die($json['status'].' https://developers.google.com/maps/documentation/geocoding/#StatusCodes');
     }
 
-    public function getApi()
+    public function latlng($lat, $lng)
     {
-        return $this->api.$this->key;
+        return 'new google.maps.LatLng('.$lat.', '.$lng.')';
+    }
+
+    public function calculateDistance($lat1, $lng1, $lat2, $lng2) {
+        $theta = $lng1 - $lng2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+
+        // Kilometers
+        return ($miles * 1.609344);
+    }
+
+    public function __toString()
+    {
+        return $this->id;
+    }
+
+    public function addOverlay($class, array $options = array())
+    {
+        $this->overlays[] = array('class' => $class, 'options' => array_merge(array('map' => $this), $options));
+
+        return $this;
     }
 
     public function setKey($key)
@@ -50,16 +76,9 @@ class Map
         return $this;
     }
 
-    public function getOverlays()
+    public function getApi()
     {
-        return $this->overlays;
-    }
-
-    public function setOverlays($overlays)
-    {
-        $this->overlays = $overlays;
-
-        return $this;
+        return $this->api.$this->key;
     }
 
     public function getMapDiv()
@@ -72,25 +91,16 @@ class Map
         return $this->options;
     }
 
-    public static function geocode($address)
+    public function getOverlays()
     {
-        return new GeocodedAddress($address);
+        return $this->overlays;
     }
 
-    public static function calculateDistance($lat1, $lng1, $lat2, $lng2) {
-        $theta = $lng1 - $lng2;
-        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-        $dist = acos($dist);
-        $dist = rad2deg($dist);
-        $miles = $dist * 60 * 1.1515;
-
-        // Kilometers
-        return ($miles * 1.609344);
-    }
-
-    public static function latlng($lat, $lng)
+    public function render()
     {
-        return 'new google.maps.LatLng('.$lat.', '.$lng.')';
+        $renderer = new MapRenderer();
+
+        return $renderer->render($this);
     }
 
     protected function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -100,10 +110,5 @@ class Map
             'zoom' => 4,
             'mapTypeId' => 'google.maps.MapTypeId.ROADMAP',
         ));
-    }
-
-    public function __toString()
-    {
-        return $this->id;
     }
 }
