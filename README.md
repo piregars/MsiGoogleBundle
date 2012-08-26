@@ -12,7 +12,7 @@ usage:
 ``` php
 // controller
 
-$map = $this->container->get('msi_google.map_factory')->create('mapCanvas', array());
+$map = $this->container->get('msi_google.map.factory')->create('mapCanvas', array('zoom' => 10));
 
 $map->setKey('ewhf09weFf9w3hj39ff9wf9h3h0h32fh38290h');
 
