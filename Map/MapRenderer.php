@@ -20,9 +20,7 @@ class MapRenderer
 
     public function toJs()
     {
-        $js = '(function() {'."\n";
-        $js .= '"use strict";'."\n";
-        $js .= 'function initMap() {'."\n";
+        $js = 'function initMap() {'."\n";
         $js .= 'var '.$this->map.' = new google.maps.Map(document.getElementById("'.$this->map->getMapDiv().'"), '.$this->arrayToJson($this->map->getOptions()).');'."\n";
 
         foreach ($this->map->getOverlays() as $overlay) {
@@ -30,8 +28,7 @@ class MapRenderer
         }
 
         $js .= '}'."\n";
-        $js .= 'google.maps.event.addDomListener(window, "load", initMap);'."\n";
-        $js .= '})();';
+        $js .= 'google.maps.event.addDomListener(window, "load", initMap);';
 
         return $js;
     }
