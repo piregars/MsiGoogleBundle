@@ -7,8 +7,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class Map
 {
-    protected $api = 'http://maps.googleapis.com/maps/api/js?sensor=false&key=';
-
     protected $key;
 
     protected $mapDiv;
@@ -69,16 +67,16 @@ class Map
         return $this;
     }
 
+    public function getKey()
+    {
+        return $this->key;
+    }
+
     public function setKey($key)
     {
         $this->key = $key;
 
         return $this;
-    }
-
-    public function getApi()
-    {
-        return $this->api.$this->key;
     }
 
     public function getMapDiv()
@@ -96,7 +94,12 @@ class Map
         return $this->overlays;
     }
 
-    public function render()
+    public function renderHtml()
+    {
+        return '<div id="'.$this->mapDiv.'"></div>';
+    }
+
+    public function renderJs()
     {
         $renderer = new MapRenderer();
 
