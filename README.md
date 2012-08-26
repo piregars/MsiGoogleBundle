@@ -13,7 +13,7 @@ usage:
 
     $builder = $this->container->get('msi_google.map_factory')->createBuilder('mapCanvas', array());
 
-    $builder->setKey('AIzaSyApRm7i1CAzNjNGhb2lqwwTRJDtKf68EKo');
+    $builder->setKey('ewhf09weFf9w3hj39ff9wf9h3h0h32fh38290h');
 
     $builder->addOverlay('marker', array(
         'position' => Map::latlng(-32423, 737213),
