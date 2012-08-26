@@ -1,0 +1,18 @@
+{
+    "name": "msi/google-bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexis Joubert",
+            "email": "alexisjoubert@groupemsi.com"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": { "Msi\\Bundle\\GoogleBundle": "" }
+    },
+    "target-dir": "Msi/Bundle/GoogleBundle"
+}
