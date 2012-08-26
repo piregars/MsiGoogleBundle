@@ -23,9 +23,9 @@ $map->addOverlay('marker', array(
 
 // view
 
-{{ map.renderHtml|raw }}
+{{ map.html|raw }}
 
 // ...
 
-{{ map.renderJs|raw }}
+{{ map.js|raw }}
 ```

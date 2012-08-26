@@ -94,12 +94,12 @@ class Map
         return $this->overlays;
     }
 
-    public function renderHtml()
+    public function getHtml()
     {
         return '<div id="'.$this->mapDiv.'"></div>';
     }
 
-    public function renderJs()
+    public function getJs()
     {
         $renderer = new MapRenderer();
 
