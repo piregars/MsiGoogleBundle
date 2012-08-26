@@ -1,0 +1,9 @@
+{% extends 'MsiAdminBundle::layout.html.twig' %}
+
+{% block content %}
+<div id="mapCanvas" style="width:500px;height:300px;"></div>
+<script src="{{ map.api }}"></script>
+<script>
+{{ map.render|raw }}
+</script>
+{% endblock content %}
