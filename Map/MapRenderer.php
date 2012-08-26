@@ -37,13 +37,13 @@ class MapRenderer
     {
         $js = '{'."\n";
 
+        $i = 1;
+        $l = count($array);
         foreach ($array as $k => $v) {
-            if (is_array($v)) {
-                $js .= '    '.$k.': '.self::arrayToJs($v).','."\n";
-            } else {
-                $js .= '    '.$k.': '.$v.','."\n";
-            }
+            $js .= '    '.$k.': '.(is_array($v) ? $this->arrayToJson($v) : $v).($i === $l ? '' : ',')."\n";
+            $i++;
         }
+
         $js .= '}';
 
         return $js;
@@ -53,10 +53,14 @@ class MapRenderer
     {
         $js = '['."\n";
 
+        $i = 1;
+        $l = count($array);
         foreach ($array as $k => $v) {
-            $js .= '        '.$v.','."\n";
+            $js .= '    '.(is_array($v) ? $this->arrayToJs($v) : $v).($i === $l ? '' : ',')."\n";
+            $i++;
         }
-        $js .= '    ]';
+
+        $js .= ']';
 
         return $js;
     }
