@@ -9,18 +9,20 @@ class Map
 {
     protected $key;
 
-    protected $mapDiv;
+    protected $mapDivId;
 
     protected $options;
+
+    protected $attributes = array();
 
     protected $id;
 
     protected $overlays = array();
 
-    public function __construct($mapDiv, array $options = array())
+    public function __construct($mapDivId, array $options = array())
     {
         $this->id = 'map'.uniqid();
-        $this->mapDiv = $mapDiv;
+        $this->mapDivId = $mapDivId;
 
         $resolver = new OptionsResolver();
         $this->setDefaultOptions($resolver);
@@ -60,6 +62,34 @@ class Map
         return $this->id;
     }
 
+    public function getAttribute($key, $default = null)
+    {
+        if (isset($this->attributes[$key])) {
+            return $this->attributes[$key];
+        }
+
+        return $default;
+    }
+
+    public function setAttribute($key, $value)
+    {
+        $this->attributes[$key] = $value;
+
+        return $this;
+    }
+
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
     public function addOverlay($class, array $options = array())
     {
         $this->overlays[] = array('class' => $class, 'options' => array_merge(array('map' => $this), $options));
@@ -79,9 +109,9 @@ class Map
         return $this;
     }
 
-    public function getMapDiv()
+    public function getMapDivId()
     {
-        return $this->mapDiv;
+        return $this->mapDivId;
     }
 
     public function getOptions()
@@ -94,12 +124,7 @@ class Map
         return $this->overlays;
     }
 
-    public function getHtml()
-    {
-        return '<div id="'.$this->mapDiv.'"></div>';
-    }
-
-    public function getJs()
+    public function toJs()
     {
         $renderer = new MapRenderer();
 
