@@ -12,20 +12,21 @@ usage:
 ``` php
 // controller
 
-$map = $this->container->get('msi_google.map.factory')->create('mapCanvas', array('zoom' => 10));
+$map = $this->container->get('msi_google.map.factory')->create();
 
-$map->setKey('ewhf09weFf9w3hj39ff9wf9h3h0h32fh38290h');
+// $map->setKey('ewhf09weFf9w3hj39ff9wf9h3h0h32fh38290h');
 
 $map->addOverlay('marker', array(
-    'position' => $map->latlng(-32423, 737213),
-    'title' => 'dadada',
+    'position' => $map->latlng(45.5086699, -73.5539925),
+    'title' => '"some_title"',
+    'icon' => '"path_to_some_icon_image"',
 ));
 
 // view
 
-{{ map.html|raw }}
+{{ msi_google_render_map_html(map) }}
 
 // ...
 
-{{ map.js|raw }}
+{{ msi_google_render_map_js(map) }}
 ```
