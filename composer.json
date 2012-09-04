@@ -10,7 +10,7 @@
     ],
     "require": {
         "symfony/framework-bundle": "2.1.*",
-        "msi/php-google-apis": "dev-master"
+        "msi/php-google": "dev-master"
     },
     "autoload": {
         "psr-0": { "Msi\\Bundle\\GoogleBundle": "" }
