@@ -8,9 +8,6 @@
             "email": "alexisjoubert@groupemsi.com"
         }
     ],
-    "require": {
-        "msi/php-google": "dev-master"
-    },
     "autoload": {
         "psr-0": { "Msi\\GoogleBundle": "" }
     },
