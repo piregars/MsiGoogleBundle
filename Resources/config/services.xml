@@ -11,7 +11,7 @@
     <services>
         <service id="msi_google.map.factory" class="%msi_google.map.factory.class%" />
 
-        <service id="msi_google.google.twig.extension" class="Msi\Bundle\GoogleBundle\Twig\Extension\GoogleExtension" public="false">
+        <service id="msi_google.google.twig.extension" class="Msi\GoogleBundle\Twig\Extension\GoogleExtension" public="false">
             <tag name="twig.extension" />
         </service>
     </services>

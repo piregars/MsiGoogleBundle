@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\Bundle\GoogleBundle\DependencyInjection;
+namespace Msi\GoogleBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

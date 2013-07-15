@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\Bundle\GoogleBundle\Twig\Extension;
+namespace Msi\GoogleBundle\Twig\Extension;
 
 class GoogleExtension extends \Twig_Extension
 {

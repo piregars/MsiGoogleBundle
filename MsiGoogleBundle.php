@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\Bundle\GoogleBundle;
+namespace Msi\GoogleBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

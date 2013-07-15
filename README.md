@@ -4,7 +4,7 @@ MsiGoogleBundle
 register bundle:
 
 ``` php
-new Msi\Bundle\GoogleBundle\MsiGoogleBundle(),
+new Msi\GoogleBundle\MsiGoogleBundle(),
 ```
 
 usage:
