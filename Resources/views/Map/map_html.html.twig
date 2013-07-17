@@ -1,2 +1,2 @@
-{% set map_attr = map.attributes|merge({'id': map.mapDivId}) %}
+{% set map_attr = map.attributes|merge({'id': 'mapCanvas'}) %}
 <div{% for attrname, attrvalue in map_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}></div>
